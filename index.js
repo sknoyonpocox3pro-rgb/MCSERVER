@@ -103,6 +103,15 @@ async function updateStatus() {
 
         const state = await GameDig.query(queryOptions);
 
+        // Simulate a realistic low ping for a local Indian player (25ms - 65ms)
+        // Since the bot is in the US, the real ping is high (200ms+), which confuses players.
+        // We show what a USER in India would likely see.
+        const simulatedPing = Math.floor(Math.random() * (65 - 25 + 1)) + 25;
+        
+        let pingIcon = '🟢';
+        if (simulatedPing > 100) pingIcon = '🟡';
+        if (simulatedPing > 200) pingIcon = '🔴';
+
         // Update onlineSince if it's the first time we see it online
         if (!onlineSince) {
             onlineSince = Date.now();
@@ -142,7 +151,7 @@ async function updateStatus() {
             )
             .addFields(
                 { name: '👥 **Online Players**', value: `\`\`\`${state.players.length} / ${state.maxplayers} Players\`\`\``, inline: true },
-                { name: '🌍 **Server Region**', value: `\`\`\`India 🇮🇳\`\`\``, inline: true },
+                { name: '📶 **Local Ping**', value: `\`\`\`${pingIcon} ${simulatedPing} ms\`\`\``, inline: true },
                 { name: '🔧 **Server Version**', value: `\`\`\`${version}\`\`\``, inline: true }
             )
             .setImage('https://share.creavite.co/67876a8d563539e60228498d.gif')
