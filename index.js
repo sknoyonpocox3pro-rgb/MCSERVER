@@ -34,8 +34,8 @@ function saveConfig() {
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     
-    // Start the update interval
-    setInterval(updateStatus, 1000); // 1 second
+    // Start the update loop
+    updateStatus();
 });
 
 client.on('messageCreate', async message => {
@@ -95,6 +95,11 @@ async function updateStatus() {
         if (port) {
             queryOptions.port = port;
         }
+
+        // Add timeout options to make it faster/real-time
+        queryOptions.maxAttempts = 1;
+        queryOptions.socketTimeout = 2000;
+        queryOptions.debug = false;
 
         const state = await GameDig.query(queryOptions);
 
@@ -176,6 +181,9 @@ async function updateStatus() {
         
         editMessage(embed);
         console.error('Error querying server:', error.message);
+    } finally {
+        // Schedule next update
+        setTimeout(updateStatus, 1000);
     }
 }
 
