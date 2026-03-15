@@ -28,11 +28,16 @@ let onlineSince = null;
 
 // Helper to save config
 function saveConfig() {
-    fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2));
+    try {
+        fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2));
+    } catch (err) {
+        console.error('Failed to save config:', err);
+    }
 }
 
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    console.log('Bot is ready and listening for commands.');
     
     // Start the update loop
     updateStatus();
@@ -40,6 +45,14 @@ client.once('ready', () => {
 
 client.on('messageCreate', async message => {
     if (message.author.bot) return;
+
+    // Debug log to check if messages are being received
+    console.log(`Received message from ${message.author.tag}: ${message.content}`);
+
+    // Command: !ping (Health Check)
+    if (message.content === '!ping') {
+        return message.reply('Pong! 🏓 I am online and working.');
+    }
 
     // Command: !setup <ip> [type]
     if (message.content.startsWith('!setup')) {
