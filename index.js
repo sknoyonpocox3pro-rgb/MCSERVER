@@ -113,7 +113,7 @@ async function updateAllServers() {
     }
     
     // Schedule next global update
-    setTimeout(updateAllServers, 15000); // Check all servers every 15 seconds to avoid rate limits
+    setTimeout(updateAllServers, 5000); // Check all servers every 5 seconds
 }
 
 async function updateSingleServer(config, serverKey) {
@@ -181,7 +181,7 @@ async function updateSingleServer(config, serverKey) {
             .setImage('https://share.creavite.co/67876a8d563539e60228498d.gif')
             .setColor(0x57F287)
             .setThumbnail(client.user.displayAvatarURL())
-            .setFooter({ text: `Live Monitoring System • Multi-Server Support`, iconURL: client.user.displayAvatarURL() })
+            .setFooter({ text: `Live Monitoring System • Updates every 5 seconds`, iconURL: client.user.displayAvatarURL() })
             .setTimestamp();
 
         if (state.players.length > 0) {
