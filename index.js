@@ -142,13 +142,13 @@ async function updateStatus() {
             )
             .addFields(
                 { name: '👥 **Online Players**', value: `\`\`\`${state.players.length} / ${state.maxplayers} Players\`\`\``, inline: true },
-                { name: '📶 **Network Ping**', value: `\`\`\`${pingIcon} ${state.ping} ms\`\`\``, inline: true },
+                { name: '📶 **Bot Latency**', value: `\`\`\`${pingIcon} ${state.ping} ms\`\`\``, inline: true },
                 { name: '🔧 **Server Version**', value: `\`\`\`${version}\`\`\``, inline: true }
             )
             .setImage('https://share.creavite.co/67876a8d563539e60228498d.gif')
             .setColor(0x57F287) // Discord Green
             .setThumbnail(client.user.displayAvatarURL())
-            .setFooter({ text: `Live Monitoring System • Updates every 1 second`, iconURL: client.user.displayAvatarURL() })
+            .setFooter({ text: `Live Monitoring • Ping shows Bot-to-Server latency (US -> IN)`, iconURL: client.user.displayAvatarURL() })
             .setTimestamp();
 
         // Optional: List players if there are any (and not too many)
