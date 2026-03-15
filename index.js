@@ -35,7 +35,7 @@ client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     
     // Start the update interval
-    setInterval(updateStatus, 10000); // 10 seconds
+    setInterval(updateStatus, 1000); // 1 second
 });
 
 client.on('messageCreate', async message => {
@@ -66,7 +66,7 @@ client.on('messageCreate', async message => {
         config.messageId = sentMessage.id;
         saveConfig();
 
-        message.reply(`Setup complete! Monitoring **${ip}** (${type}). Status will update every 10 seconds.`);
+        message.reply(`Setup complete! Monitoring **${ip}** (${type}). Status will update every 1 second.`);
         
         // Trigger an immediate update
         updateStatus();
@@ -143,7 +143,7 @@ async function updateStatus() {
             .setImage('https://share.creavite.co/67876a8d563539e60228498d.gif')
             .setColor(0x57F287) // Discord Green
             .setThumbnail(client.user.displayAvatarURL())
-            .setFooter({ text: `Live Monitoring System • Updates every 10 seconds`, iconURL: client.user.displayAvatarURL() })
+            .setFooter({ text: `Live Monitoring System • Updates every 1 second`, iconURL: client.user.displayAvatarURL() })
             .setTimestamp();
 
         // Optional: List players if there are any (and not too many)
@@ -171,7 +171,7 @@ async function updateStatus() {
             )
             .setColor(0xED4245) // Discord Red
             .setThumbnail(client.user.displayAvatarURL())
-            .setFooter({ text: `Updates every 10s • Status: Offline`, iconURL: client.user.displayAvatarURL() })
+            .setFooter({ text: `Updates every 1s • Status: Offline`, iconURL: client.user.displayAvatarURL() })
             .setTimestamp();
         
         editMessage(embed);
