@@ -123,11 +123,6 @@ async function updateStatus() {
             version = state.raw.vanilla.raw.version.name;
         }
 
-        // Ping Indicator
-        let pingIcon = '🟢';
-        if (state.ping > 100) pingIcon = '🟡';
-        if (state.ping > 200) pingIcon = '🔴';
-
         // Online Status
         const embed = new EmbedBuilder()
             .setTitle(`${state.name || 'Minecraft Server'}`)
